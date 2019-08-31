@@ -1,0 +1,12 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/thebigsmileXD/structuretest
+branches:
+- master
+projects:
+  structuretest:
+    path: ""
+    libs:
+    - src: thebigsmilexd/libstructure/libstructure
+      version: ^0.0.0
+    - src: muqsit/invmenu/InvMenu
+      version: ^2.0.0
+...
