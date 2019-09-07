@@ -36,10 +36,16 @@ class Loader extends PluginBase implements Listener
         if (is_null($session)) return;
         $selection = $session->getLatestSelection();
         if (is_null($selection)) return;
-        $aabb = $selection->getShape()->getAABB();
+        try {
+            $shape = $selection->getShape();
+        } catch (\Exception $ex) {
+            $e->getPlayer()->sendMessage($ex->getMessage());
+            return;
+        }
+        $aabb = $shape->getAABB();
         $min = new Vector3($aabb->minX, $aabb->minY, $aabb->minZ);
         $max = new Vector3($aabb->maxX, $aabb->maxY, $aabb->maxZ);
-        $name = basename(get_class($selection->getShape()));
+        $name = basename(get_class($shape));
         $menu = InvMenu::create(StructureUI::class, StructureUI::getMinV3($min, $max), StructureUI::getMaxV3($min, $max), $name);
         var_dump($menu->getInventory());
         $menu->send($e->getPlayer());
